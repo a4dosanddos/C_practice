@@ -6,7 +6,7 @@ void main(int argc, char *argv[])
 	char *p;
 	int i, length;
 
-	if(argv[1] == NULL) {
+	if(argc == 1) {
 		printf("ƒpƒX‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢");
 		exit(1);
 	}
