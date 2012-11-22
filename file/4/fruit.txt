@@ -1,0 +1,7 @@
+orange 300
+apple 500
+melon 5000
+mango 1000
+pineapple 800
+strawberry 600
+peach 700
