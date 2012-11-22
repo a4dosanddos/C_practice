@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
+int func(const void *a, const void *b);
+
 struct Fruit {
 	char name[80];
 	int price;
@@ -27,14 +29,20 @@ void main(void)
 		i++;
 	}
 	
-	qsort(fruit, 7, sizeof(fruit), func);
+	qsort(fruit, 7, sizeof(struct Fruit), func);
+	
+	for(i = 0; i < 7; i++) {
+		printf("%s : %d\n", fruit[i].name, fruit[i].price);
+	}
 }
 
 int func(const void *a, const void *b)
 {
-	if(((fruit *)a)->price > ((fruit *)b)->price) {
-		
-	} else if(((fruit *)a)->price < ((fruit *)b)->price) {
-		
-	}{ e
+	if(((struct Fruit *)a)->price > ((struct Fruit *)b)->price) {
+		return 1;
+	} else if(((struct Fruit *)a)->price == ((struct Fruit *)b)->price) {
+		return 0;
+	} else {
+		return -1;
+	}
 }
