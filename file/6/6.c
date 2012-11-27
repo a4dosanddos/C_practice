@@ -2,14 +2,20 @@
 
 typedef struct USER {
 	int id;
-	char name[8];
+	char name[6];
 	int num;
 } user;
+
+typedef struct USER2{
+	int c;
+	double n;
+	char cc;
+} user2;
 
 void main(void)
 {
 	FILE *f;
-	user u[10];
+	user u;
 	unsigned char buf[500];
 	int i, j, k, l, size;
 	
@@ -18,9 +24,20 @@ void main(void)
 		exit(1);
 	}
 	
-	size = fread(buf, sizeof(unsigned char), 500, f);
+	fseek(f, 0, SEEK_SET);
+	fread(&u, 16, 1, f);
+	printf("id   : %d\n", u.id);
+	printf("name : %s\n", u.name);
+	printf("num  : %d\n", u.num);
 	
-	printf("バイナリファイルの内容\n-----");
+	
+	printf("%d\n", sizeof(user));
+	//printf("%p %p %p\n", &(u.id), &(u.name), &(u.num));
+	printf("%d\n", sizeof(user2));
+	
+	return;
+	
+	/*printf("バイナリファイルの内容\n-----");
 	for(i = 0; i < size; i++) {
 		if(i % 16 == 0) printf("\n");
 		printf("%x", buf[i]);
@@ -49,9 +66,9 @@ void main(void)
 		if (i % 16 == 15) {
 			k++;
 		}
-	}
+	}*/
 	
-	printf("id   : %d\n", u[8].id);
+	/*printf("id   : %d\n", u[8].id);
 	printf("name : %s\n", u[8].name);
 	printf("num  : %d\n", u[8].num);
 	printf("id   : %d\n", u[5].id);
@@ -65,5 +82,5 @@ void main(void)
 	printf("num  : %d\n", u[3].num);
 	printf("id   : %d\n", u[1].id);
 	printf("name : %s\n", u[1].name);
-	printf("num  : %d\n", u[1].num);
+	printf("num  : %d\n", u[1].num);*/
 }
