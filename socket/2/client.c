@@ -7,7 +7,7 @@ void main(void)
 	WSADATA wsaData;
 	struct sockaddr_in server;
 	SOCKET sock;
-	char buf[32], ipaddr[16], sendmsg[256];
+	char ipaddr[16], buf[256], sendmsg[256];
 	int n;
 	
 	printf("IPアドレス : ");gets(ipaddr);
@@ -25,15 +25,14 @@ void main(void)
 		
 		memset(sendmsg, 0, sizeof(sendmsg));
 		printf("サーバへ送信するメッセージ : ");gets(sendmsg);
-		send(sock, sendmsg, sizeof(sendmsg), 0);
+		send(sock, sendmsg, strlen(sendmsg), 0);
 		
 		memset(buf, 0, sizeof(buf));
 		n = recv(sock, buf, sizeof(buf), 0);
 		if(n == -1) {
 			break;
 		}
-		printf("サーバから受信したメッセージ : %s\n", buf);
-		printf("%d\n", n);
+		printf("サーバから受信したメッセージ : %d %s\n", n, buf);
 	}
 	WSACleanup();
 }

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <winsock2.h>
 #include <sys/types.h>
 #include <windows.h>
@@ -9,6 +10,7 @@ void recvfunc(SOCKET sock)
 	char recvmsg[256];
 	int ret;
 	
+	printf("スレッドを開始します\n");
 	while(1) {
 		memset(recvmsg, 0, sizeof(recvmsg));
 		ret = recv(sock, recvmsg, sizeof(recvmsg), 0);
@@ -17,15 +19,16 @@ void recvfunc(SOCKET sock)
 		}
 		printf("クライアントから送信されたのは %s です。\n", recvmsg);
 		
-		send(sock, recvmsg, sizeof(recvmsg), 0);
+		send(sock, recvmsg, strlen(recvmsg), 0);
 	}
+	printf("スレッドを終了します\n");
 	closesocket(sock);
 }
 
 void main(void)
 {
 	WSADATA wsaData;
-	SOCKET sock, sock0;
+	SOCKET sock0, sock;
 	struct sockaddr_in addr;
 	struct sockaddr_in client;
 	int len;
